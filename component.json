@@ -1,0 +1,12 @@
+{
+  "name": "canvas",
+  "repo": "mteam/canvas",
+  "version": "0.1.0",
+  "dependencies": {
+    "mteam/drawable": "*",
+    "mteam/helpers": "*"
+  },
+  "scripts": [
+    "index.js"
+  ]
+}
