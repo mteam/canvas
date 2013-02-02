@@ -50,7 +50,7 @@ function Canvas(element) {
   this.context = element.getContext('2d');
 }
 
-Canvas.prototype = Object.create(Drawable);
+Canvas.prototype = Object.create(Drawable.prototype);
 
 Canvas.prototype.getWidth = function() {
   return this.element.width;
