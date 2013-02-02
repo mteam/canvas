@@ -1,4 +1,4 @@
-var drawable = require('drawable'),
+var Drawable = require('drawable'),
     is = require('helpers').is;
 
 // --- factories ---
