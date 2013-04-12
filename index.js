@@ -3,15 +3,9 @@ var Drawable = require('drawable'),
 
 // --- factories ---
 
-Canvas.id = function(id) {
-  if (is.string(id)) {
-    var result = /^#?(.+)$/.exec(id),
-        el = document.getElementById(result[1]);
-
-    return Canvas.element(el);
-  } else {
-    return null;
-  }
+Canvas.qs = function(selector) {
+  var el = document.querySelector(selector);
+  return Canvas.element(el);
 };
 
 Canvas.dimensions = function(width, height) {
