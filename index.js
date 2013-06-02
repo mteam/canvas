@@ -53,6 +53,13 @@ Canvas.prototype = {
     return this.element.height;
   },
 
+  fillParent: function() {
+    var parent = this.element.parentNode;
+    
+    this.element.width = parent.clientWidth;
+    this.element.height = parent.clientHeight;
+  },
+
   // --- drawing ---
 
   draw: function(ctx, x, y) {
