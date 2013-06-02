@@ -1,5 +1,4 @@
-var Drawable = require('drawable'),
-    is = require('helpers').is;
+var is = require('helpers').is;
 
 // --- factories ---
 
@@ -44,28 +43,30 @@ function Canvas(element) {
   this.context = element.getContext('2d');
 }
 
-Canvas.prototype = Object.create(Drawable.prototype);
+Canvas.prototype = {
 
-Canvas.prototype.getWidth = function() {
-  return this.element.width;
-};
+  getWidth: function() {
+    return this.element.width;
+  },
 
-Canvas.prototype.getHeight = function() {
-  return this.element.height;
-};
+  getHeight: function() {
+    return this.element.height;
+  },
 
-// --- drawing ---
+  // --- drawing ---
 
-Canvas.prototype.draw = function(ctx, x, y) {
-  ctx.drawImage(this.element, x, y);
-};
+  draw: function(ctx, x, y) {
+    ctx.drawImage(this.element, x, y);
+  },
 
-Canvas.prototype.drawRect = function(ctx, rect, x, y) {
-  ctx.drawImage(
-    this.element,
-    rect.left, rect.top, rect.width, rect.height,
-    x, y, rect.width, rect.height
-  );
+  drawRect: function(ctx, rect, x, y) {
+    ctx.drawImage(
+      this.element,
+      rect.left, rect.top, rect.width, rect.height,
+      x, y, rect.width, rect.height
+    );
+  }
+
 };
 
 module.exports = Canvas;
