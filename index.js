@@ -2,12 +2,12 @@ var is = require('helpers').is;
 
 // --- factories ---
 
-Canvas.qs = function(selector) {
+Canvas.fromSelector = function(selector) {
   var el = document.querySelector(selector);
-  return Canvas.element(el);
+  return el ? Canvas.element(el) : null;
 };
 
-Canvas.dimensions = function(width, height) {
+Canvas.fromSize = function(width, height) {
   if (is.number(width) && is.number(height)) {
     var el = document.createElement('canvas');
 
@@ -20,17 +20,13 @@ Canvas.dimensions = function(width, height) {
   }
 };
 
-Canvas.element = function(el) {
-  if (is.canvas(el)) {
-    return new Canvas(el);
-  } else {
-    return null;
-  }
+Canvas.fromElement = function(el) {
+  return is.canvas(el) ? new Canvas(el) : null;
 };
 
 Canvas.clone = function(canvas) {
   if (canvas instanceof Canvas) {
-    return Canvas.dimensions(canvas.getWidth(), canvas.getHeight());
+    return Canvas.fromSize(canvas.width(), canvas.height());
   } else {
     return null;
   }
@@ -39,39 +35,33 @@ Canvas.clone = function(canvas) {
 // --- implementation ---
 
 function Canvas(element) {
-  this.element = element;
-  this.context = element.getContext('2d');
+  this.el = element;
+  this.ctx = element.getContext('2d');
 }
 
 Canvas.prototype = {
 
-  getWidth: function() {
-    return this.element.width;
+  width: function() {
+    return this.el.width;
   },
 
-  getHeight: function() {
-    return this.element.height;
+  height: function() {
+    return this.el.height;
   },
 
   fillParent: function() {
-    var parent = this.element.parentNode;
+    var parent = this.el.parentNode;
     
-    this.element.width = parent.clientWidth;
-    this.element.height = parent.clientHeight;
+    this.el.width = parent.clientWidth;
+    this.el.height = parent.clientHeight;
   },
 
-  // --- drawing ---
+  clear: function() {
+    this.ctx.clearRect(0, 0, this.width(), this.height());
+  },
 
   draw: function(ctx, x, y) {
-    ctx.drawImage(this.element, x, y);
-  },
-
-  drawRect: function(ctx, rect, x, y) {
-    ctx.drawImage(
-      this.element,
-      rect.left, rect.top, rect.width, rect.height,
-      x, y, rect.width, rect.height
-    );
+    ctx.drawImage(this.el, x, y);
   }
 
 };
