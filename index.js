@@ -1,4 +1,5 @@
 var is = require('helpers').is;
+var autoscale = require('autoscale-canvas');
 
 // --- factories ---
 
@@ -54,6 +55,21 @@ Canvas.prototype = {
     
     this.el.width = parent.clientWidth;
     this.el.height = parent.clientHeight;
+  },
+
+  autoscale: function() {
+    autoscale(this.el);
+  },
+
+  disableSmoothing: function() {
+    [
+      'imageSmoothingEnabled', 'webkitImageSmoothingEnabled',
+      'mozImageSmoothingEnabled'
+    ].forEach(function(name) {
+      if (this.ctx[name] != null) {
+        this.ctx[name] = false;
+      }
+    }, this);
   },
 
   clear: function() {

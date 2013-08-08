@@ -3,7 +3,8 @@
   "repo": "mteam/canvas",
   "version": "0.1.0",
   "dependencies": {
-    "mteam/helpers": "*"
+    "mteam/helpers": "*",
+    "component/autoscale-canvas": "*"
   },
   "scripts": [
     "index.js"
