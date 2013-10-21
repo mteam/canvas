@@ -43,11 +43,11 @@ function Canvas(element) {
 Canvas.prototype = {
 
   width: function() {
-    return this.el.clientWidth;
+    return this.el.width;
   },
 
   height: function() {
-    return this.el.clientHeight;
+    return this.el.height;
   },
 
   fillParent: function() {
